@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UniFlow - Horario Universitario</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    background:
+    radial-gradient(circle at top left,#2a1350 0%,transparent 35%),
+    radial-gradient(circle at top right,#0c4f5b 0%,transparent 35%),
+    radial-gradient(circle at bottom,#0d3312 0%,transparent 40%),
+    #09090f;
+}
+
+.glass{
+    backdrop-filter: blur(16px);
+    background: rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.scroll-custom::-webkit-scrollbar{
+    width:6px;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb{
+    background:#8b5cf6;
+    border-radius:20px;
+}
+
+.card-hover{
+    transition:.3s;
+}
+
+.card-hover:hover{
+    transform:translateY(-4px);
+}
+
+</style>
+</head>
+
+<body class="min-h-screen text-white">
+
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+
+    <header class="mb-8">
+        <div class="glass rounded-3xl p-6">
+            <h1 class="text-4xl font-black bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+                UniFlow
+            </h1>
+
+            <p class="text-gray-300 mt-2">
+                Organiza tus asignaturas universitarias y mantén tus horarios siempre disponibles.
+            </p>
+        </div>
+    </header>
+
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+
+        <button
+            onclick="openModal()"
+            class="bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-4 rounded-2xl font-semibold hover:scale-105 transition">
+            + Agregar Asignatura
+        </button>
+
+        <button
+            onclick="clearAll()"
+            class="glass px-6 py-4 rounded-2xl hover:bg-red-500/20 transition">
+            Limpiar horario
+        </button>
+
+    </div>
+
+    <div
+        id="calendar"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div
+id="modal"
+class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+
+<div class="glass rounded-3xl p-6 w-full max-w-lg">
+
+<h2 class="text-2xl font-bold mb-5">
+Nueva asignatura
+</h2>
+
+<div class="space-y-4">
+
+<input
+id="subject"
+type="text"
+placeholder="Nombre de la asignatura"
+class="w-full bg-white/10 rounded-xl p-3 outline-none">
+
+<select
+id="day"
+class="w-full bg-slate-900 rounded-xl p-3">
+
+<option>Lunes</option>
+<option>Martes</option>
+<option>Miércoles</option>
+<option>Jueves</option>
+<option>Viernes</option>
+<option>Sábado</option>
+<option>Domingo</option>
+
+</select>
+
+<div class="grid grid-cols-2 gap-3">
+
+<div>
+<label class="text-sm text-gray-300">
+Hora inicio
+</label>
+
+<input
+id="start"
+type="time"
+class="w-full bg-white/10 rounded-xl p-3">
+</div>
+
+<div>
+<label class="text-sm text-gray-300">
+Hora final
+</label>
+
+<input
+id="end"
+type="time"
+class="w-full bg-white/10 rounded-xl p-3">
+</div>
+
+</div>
+
+<textarea
+id="notes"
+placeholder="Notas (opcional)"
+rows="4"
+class="w-full bg-white/10 rounded-xl p-3 resize-none">
+</textarea>
+
+<div class="flex justify-end gap-3">
+
+<button
+onclick="closeModal()"
+class="px-5 py-3 glass rounded-xl">
+Cancelar
+</button>
+
+<button
+onclick="saveSubject()"
+class="px-5 py-3 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-xl">
+Guardar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const DAYS = [
+"Lunes",
+"Martes",
+"Miércoles",
+"Jueves",
+"Viernes",
+"Sábado",
+"Domingo"
+];
+
+let schedule =
+JSON.parse(localStorage.getItem("uniflowSchedule")) || [];
+
+function saveStorage(){
+    localStorage.setItem(
+        "uniflowSchedule",
+        JSON.stringify(schedule)
+    );
+}
+
+function openModal(){
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+}
+
+function closeModal(){
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+}
+
+function getDuration(start,end){
+
+    const [h1,m1] = start.split(":").map(Number);
+    const [h2,m2] = end.split(":").map(Number);
+
+    const total =
+    (h2*60+m2) -
+    (h1*60+m1);
+
+    const hours = Math.floor(total/60);
+    const minutes = total%60;
+
+    return `${hours}h ${minutes}m`;
+}
+
+function saveSubject(){
+
+    const subject =
+    document.getElementById("subject").value.trim();
+
+    const day =
+    document.getElementById("day").value;
+
+    const start =
+    document.getElementById("start").value;
+
+    const end =
+    document.getElementById("end").value;
+
+    const notes =
+    document.getElementById("notes").value;
+
+    if(!subject || !start || !end){
+        alert("Completa los campos requeridos");
+        return;
+    }
+
+    schedule.push({
+        id:Date.now(),
+        subject,
+        day,
+        start,
+        end,
+        notes
+    });
+
+    saveStorage();
+    render();
+
+    document.getElementById("subject").value="";
+    document.getElementById("start").value="";
+    document.getElementById("end").value="";
+    document.getElementById("notes").value="";
+
+    closeModal();
+}
+
+function deleteSubject(id){
+
+    schedule =
+    schedule.filter(item => item.id !== id);
+
+    saveStorage();
+    render();
+}
+
+function render(){
+
+    const calendar =
+    document.getElementById("calendar");
+
+    calendar.innerHTML="";
+
+    DAYS.forEach(day=>{
+
+        const dayItems =
+        schedule
+        .filter(item=>item.day===day)
+        .sort((a,b)=>a.start.localeCompare(b.start));
+
+        const card =
+        document.createElement("div");
+
+        card.className=
+        "glass rounded-3xl p-5 h-[550px] flex flex-col";
+
+        card.innerHTML=
+        `
+        <div class="mb-4">
+
+            <h2 class="font-bold text-xl">
+                ${day}
+            </h2>
+
+            <div class="w-12 h-1 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 mt-2">
+            </div>
+
+        </div>
+
+        <div class="space-y-4 overflow-y-auto scroll-custom flex-1">
+
+            ${
+                dayItems.length
+                ?
+                dayItems.map(item=>`
+
+                <div class="card-hover rounded-2xl bg-white/10 p-4">
+
+                    <div class="flex justify-between">
+
+                        <h3 class="font-bold text-lg">
+                            ${item.subject}
+                        </h3>
+
+                        <button
+                        onclick="deleteSubject(${item.id})"
+                        class="text-red-400 hover:text-red-300">
+                            ✕
+                        </button>
+
+                    </div>
+
+                    <div class="mt-2 text-sm text-cyan-300">
+                        ${item.start} - ${item.end}
+                    </div>
+
+                    <div class="text-xs text-violet-300 mt-1">
+                        Duración:
+                        ${getDuration(item.start,item.end)}
+                    </div>
+
+                    ${
+                        item.notes
+                        ?
+                        `
+                        <div class="mt-3 text-sm text-gray-300">
+                            ${item.notes}
+                        </div>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+                `).join("")
+                :
+                `
+                <div class="text-center py-16 text-gray-400">
+                    Sin asignaturas
+                </div>
+                `
+            }
+
+        </div>
+        `;
+
+        calendar.appendChild(card);
+
+    });
+
+}
+
+function clearAll(){
+
+    if(
+        confirm(
+            "¿Deseas eliminar todo el horario?"
+        )
+    ){
+
+        schedule=[];
+
+        saveStorage();
+
+        render();
+    }
+}
+
+render();
+
+</script>
+
+</body>
+</html>
