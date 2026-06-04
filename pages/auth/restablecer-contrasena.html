@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer contraseña - TutorUni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config/tailwind.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/pages/auth.css">
+</head>
+<body class="bg-light text-gray-800 smooth-scroll auth-page">
+
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="../../index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-dark">Tutor<span class="text-primary">Uni</span></span>
+                </a>
+                <a href="login.html" class="text-gray-600 hover:text-primary font-medium transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left text-sm"></i>
+                    Volver al login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative pt-28 pb-16 lg:pt-32 hero-pattern min-h-screen flex items-center">
+        <div class="max-w-md mx-auto px-4 sm:px-6 w-full">
+            <div class="bg-white rounded-2xl auth-card p-8 sm:p-10 border border-gray-100 fade-in visible">
+                <div class="text-center mb-8">
+                    <div class="w-14 h-14 bg-secondary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-key text-secondary text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-dark">Restablecer contraseña</h1>
+                    <p class="text-gray-500 mt-2">
+                        Te enviaremos un enlace al correo asociado a tu cuenta
+                    </p>
+                </div>
+
+                <form id="reset-form" data-auth-form class="space-y-5" novalidate>
+                    <div>
+                        <label for="correo" class="block text-sm font-semibold text-dark mb-2">
+                            Correo electrónico
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input
+                                type="email"
+                                id="correo"
+                                name="correo"
+                                autocomplete="email"
+                                required
+                                placeholder="correo@universidad.edu"
+                                class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                            >
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">
+                            Usa el mismo correo con el que te registraste en TutorUni.
+                        </p>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-primary text-white py-3.5 rounded-full font-bold text-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl"
+                    >
+                        Enviar enlace de recuperación
+                    </button>
+
+                    <p data-form-feedback class="hidden text-center text-sm text-accent font-medium">
+                        Si el correo existe en nuestra base de datos, recibirás las instrucciones en breve.
+                    </p>
+                </form>
+
+                <p class="mt-8 text-center text-sm text-gray-600">
+                    ¿Recordaste tu contraseña?
+                    <a href="login.html" class="font-semibold text-primary hover:text-blue-800 transition">Iniciar sesión</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="../../assets/js/pages/auth.js"></script>
+</body>
+</html>

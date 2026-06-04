@@ -1,0 +1,17 @@
+.auth-page {
+    min-height: 100vh;
+}
+
+.auth-input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #1e40af;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+}
+
+.auth-card {
+    box-shadow: 0 25px 50px -12px rgba(30, 64, 175, 0.12);
+}

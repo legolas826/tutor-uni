@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta - TutorUni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config/tailwind.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/pages/auth.css">
+</head>
+<body class="bg-light text-gray-800 smooth-scroll auth-page">
+
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="../../index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-dark">Tutor<span class="text-primary">Uni</span></span>
+                </a>
+                <a href="login.html" class="text-gray-600 hover:text-primary font-medium transition flex items-center gap-2">
+                    <i class="fas fa-sign-in-alt text-sm"></i>
+                    Ya tengo cuenta
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative pt-28 pb-16 lg:pt-32 lg:pb-24 hero-pattern min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+                <div class="hidden lg:block fade-in visible lg:sticky lg:top-32">
+                    <div class="inline-block bg-yellow-100 text-secondary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                        Prueba gratis · Sin tarjeta
+                    </div>
+                    <h1 class="text-4xl font-extrabold text-dark leading-tight mb-4">
+                        Únete a miles de estudiantes en
+                        <span class="gradient-text">TutorUni</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Crea tu cuenta en menos de 2 minutos y reserva tu primera clase con un tutor verificado.
+                    </p>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-accent text-lg"></i>
+                            <span>Primera sesión de orientación gratuita</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-accent text-lg"></i>
+                            <span>Cancela o cambia de plan cuando quieras</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-accent text-lg"></i>
+                            <span>Tutores en más de 25 áreas de estudio</span>
+                        </li>
+                    </ul>
+                    <div class="mt-10 relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-blue-400 rounded-3xl transform rotate-2 opacity-20"></div>
+                        <img src="../../assets/images/hero-estudiantes-online.jpg"
+                             alt="Estudiantes universitarios"
+                             class="relative rounded-3xl shadow-2xl w-full object-cover h-72">
+                    </div>
+                </div>
+
+                <div class="w-full max-w-lg mx-auto lg:max-w-none fade-in visible">
+                    <div class="bg-white rounded-2xl auth-card p-8 sm:p-10 border border-gray-100">
+                        <div class="text-center mb-8">
+                            <div class="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user-plus text-accent text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-dark">Crear cuenta</h2>
+                            <p class="text-gray-500 mt-2">Empieza a mejorar tus calificaciones hoy</p>
+                        </div>
+
+                        <form id="registro-form" data-auth-form data-register-form class="space-y-5" novalidate>
+                            <div>
+                                <label for="nombre" class="block text-sm font-semibold text-dark mb-2">
+                                    Nombre completo
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                        <i class="fas fa-id-card"></i>
+                                    </span>
+                                    <input
+                                        type="text"
+                                        id="nombre"
+                                        name="nombre"
+                                        autocomplete="name"
+                                        required
+                                        minlength="2"
+                                        placeholder="Ej. María García"
+                                        class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                    >
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="correo" class="block text-sm font-semibold text-dark mb-2">
+                                    Correo electrónico
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input
+                                        type="email"
+                                        id="correo"
+                                        name="correo"
+                                        autocomplete="email"
+                                        required
+                                        placeholder="correo@universidad.edu"
+                                        class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                    >
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="usuario" class="block text-sm font-semibold text-dark mb-2">
+                                    Usuario
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input
+                                        type="text"
+                                        id="usuario"
+                                        name="usuario"
+                                        autocomplete="username"
+                                        required
+                                        minlength="3"
+                                        pattern="[a-zA-Z0-9._-]+"
+                                        title="Solo letras, números, puntos, guiones y guiones bajos"
+                                        placeholder="maria.garcia"
+                                        class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-400 mt-1">Lo usarás para iniciar sesión.</p>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="universidad" class="block text-sm font-semibold text-dark mb-2">
+                                        Universidad
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                            <i class="fas fa-university"></i>
+                                        </span>
+                                        <input
+                                            type="text"
+                                            id="universidad"
+                                            name="universidad"
+                                            required
+                                            placeholder="Ej. UIS"
+                                            class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                        >
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="carrera" class="block text-sm font-semibold text-dark mb-2">
+                                        Carrera
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                            <i class="fas fa-book"></i>
+                                        </span>
+                                        <input
+                                            type="text"
+                                            id="carrera"
+                                            name="carrera"
+                                            required
+                                            placeholder="Ej. Ingeniería"
+                                            class="auth-input w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <fieldset>
+                                <legend class="block text-sm font-semibold text-dark mb-3">Quiero registrarme como</legend>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="relative cursor-pointer">
+                                        <input type="radio" name="tipo_cuenta" value="estudiante" checked class="peer sr-only">
+                                        <span class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 transition peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary">
+                                            <i class="fas fa-user-graduate text-xl"></i>
+                                            <span class="font-semibold text-sm">Estudiante</span>
+                                        </span>
+                                    </label>
+                                    <label class="relative cursor-pointer">
+                                        <input type="radio" name="tipo_cuenta" value="tutor" class="peer sr-only">
+                                        <span class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 transition peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary">
+                                            <i class="fas fa-chalkboard-teacher text-xl"></i>
+                                            <span class="font-semibold text-sm">Tutor</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <div>
+                                <label for="contrasena" class="block text-sm font-semibold text-dark mb-2">
+                                    Contraseña
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input
+                                        type="password"
+                                        id="contrasena"
+                                        name="contrasena"
+                                        autocomplete="new-password"
+                                        required
+                                        minlength="8"
+                                        placeholder="Mínimo 8 caracteres"
+                                        class="auth-input w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                    >
+                                    <button
+                                        type="button"
+                                        data-toggle-password
+                                        aria-controls="contrasena"
+                                        aria-label="Mostrar contraseña"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition p-1"
+                                    >
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="confirmar_contrasena" class="block text-sm font-semibold text-dark mb-2">
+                                    Confirmar contraseña
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input
+                                        type="password"
+                                        id="confirmar_contrasena"
+                                        name="confirmar_contrasena"
+                                        autocomplete="new-password"
+                                        required
+                                        minlength="8"
+                                        placeholder="Repite tu contraseña"
+                                        class="auth-input w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-white text-dark placeholder-gray-400"
+                                    >
+                                    <button
+                                        type="button"
+                                        data-toggle-password
+                                        aria-controls="confirmar_contrasena"
+                                        aria-label="Mostrar contraseña"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition p-1"
+                                    >
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <label class="flex items-start gap-3 cursor-pointer select-none">
+                                <input type="checkbox" name="terminos" required class="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary shrink-0">
+                                <span class="text-sm text-gray-600 leading-relaxed">
+                                    Acepto los
+                                    <a href="#" class="font-semibold text-primary hover:text-blue-800 transition">Términos de servicio</a>
+                                    y la
+                                    <a href="#" class="font-semibold text-primary hover:text-blue-800 transition">Política de privacidad</a>
+                                </span>
+                            </label>
+
+                            <button
+                                type="submit"
+                                class="w-full bg-primary text-white py-3.5 rounded-full font-bold text-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                            >
+                                <span>Crear cuenta gratis</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+
+                            <p data-form-feedback class="hidden text-center text-sm text-accent font-medium">
+                                ¡Cuenta lista! La conexión con el servidor se configurará próximamente.
+                            </p>
+                        </form>
+
+                        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                            <p class="text-gray-600 text-sm">
+                                ¿Ya tienes cuenta?
+                                <a href="login.html" class="font-semibold text-primary hover:text-blue-800 transition">Iniciar sesión</a>
+                            </p>
+                        </div>
+
+                        <p class="mt-6 text-center text-xs text-gray-400 flex items-center justify-center gap-2">
+                            <i class="fas fa-shield-alt text-accent"></i>
+                            No compartimos tus datos con terceros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="../../assets/js/pages/auth.js"></script>
+</body>
+</html>
